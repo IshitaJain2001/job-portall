@@ -101,22 +101,43 @@ const jobSlice = createSlice({
 
     },
 
-    addJob: (state, action) => {
-      console.log(action.payload);
-let id=1
+//     addJob: (state, action) => {
+//       console.log(action.payload);
+// let id=1
 
-              const existingJobs = JSON.parse(localStorage.getItem("jobs")) || [];
-        localStorage.setItem(
-          "jobs",
-          JSON.stringify([...existingJobs, {...action.payload, id:id}])
-        );
-console.log(existingJobs);
-id++
-return {
+//               const existingJobs = JSON.parse(localStorage.getItem("jobs")) || [];
+//         localStorage.setItem(
+//           "jobs",
+//           JSON.stringify([...existingJobs, {...action.payload, id:id+1}])
+//         );
+// console.log(existingJobs);
+
+// return {
+//   ...state,
+//   jobs:[...state.jobs, action.payload]
+// }
+//     },
+
+
+addJob: (state, action) => {
+
+  const existingJobs = JSON.parse(localStorage.getItem("jobs")) || [];
+const newId = existingJobs.length > 0 
+    ? existingJobs[existingJobs.length - 1].id + 1 
+    : 1;
+const jobWithId = { ...action.payload, id: newId };
+
+ localStorage.setItem(
+    "jobs",
+    JSON.stringify([...existingJobs, jobWithId])
+  );
+
+ return {
   ...state,
-  jobs:[...state.jobs, action.payload]
-}
-    },
+  jobs:[...state.jobs, jobWithId]
+ }
+},
+
 
 
     applyJob: (state, action) => {

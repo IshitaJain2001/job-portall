@@ -6,6 +6,9 @@ import User from "./User";
 export default function Login() {
   const recruiters = JSON.parse(localStorage.getItem("recruiters"));
   const users = JSON.parse(localStorage.getItem("users"));
+
+  console.log(users);
+  
   const navigate = useNavigate();
   const [loggedInuser, setLoggedInuser] = useState(
     JSON.parse(localStorage.getItem("loggedinUser")) || "guest",

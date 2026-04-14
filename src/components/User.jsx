@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function User() {
  const [jobs,setJobs] =useState(JSON.parse(localStorage.getItem("jobs"))||[])
+ 
+const navigate= useNavigate()
  console.log(jobs);
  function handle(){
-  
+  // navigate(`/job/${}`)
  }
   return (
     <div>
