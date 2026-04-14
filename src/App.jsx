@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import User from './components/User'
 import Recrruiter from './components/Recrruiter'
+import Job from './components/Job'
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path='/signup' element={<Register/>}/>
                    <Route path='/user' element={<User/>}/>
           <Route path='/recruiter' element={<Recrruiter/>}/>
+          <Route path='/job/:id' element={<Job/>}/>
       </Routes>
     </div>
   )

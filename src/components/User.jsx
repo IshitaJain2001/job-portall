@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 export default function User() {
  const [jobs,setJobs] =useState(JSON.parse(localStorage.getItem("jobs"))||[])
- 
+
 const navigate= useNavigate()
  console.log(jobs);
- function handle(){
-  // navigate(`/job/${}`)
+ function handle(job){
+  navigate(`/job/${job.id}`)
  }
   return (
     <div>
@@ -18,7 +18,7 @@ const navigate= useNavigate()
 <div>
   <h1>{job.role}</h1> 
  <span> {job.companyName}</span> <span> ({job.employmentType})</span>
- <button onClick={handle}>view more </button>
+ <button onClick={()=>handle(job)}>view more </button>
   </div>
           )
 
