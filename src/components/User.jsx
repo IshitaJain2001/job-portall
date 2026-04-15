@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function User() {
  const [jobs,setJobs] =useState(JSON.parse(localStorage.getItem("jobs"))||[])
+const [loggedin, setLoggedin] = useState(JSON.parse(localStorage.getItem("loggedinUser")) || {})
+const [applied, setApplied] = useState(false)
 
 const navigate= useNavigate()
  console.log(jobs);
@@ -11,6 +13,16 @@ const navigate= useNavigate()
  }
   return (
     <div>
+      <button onClick={()=>setApplied(!applied)}> applied jobs</button>
+{
+  applied && loggedin.appliedJobs && loggedin.appliedJobs.map((jobss)=>{
+    return (
+      <div>
+        <h5>{jobss.companyName} applied</h5>
+        </div>
+    )
+  })
+}
       {
         jobs.length>0 ?
         jobs.map((job)=>{
