@@ -15,7 +15,7 @@ function applyHandler(job){
   console.log(job.applications);
  let newJobs = [...jobss, job]
  console.log("---------------",newJobs);
- 
+ localStorage.setItem("jobs", JSON.stringify(newJobs))
 dispatch(applyJob(job, user.name))
 
 }
