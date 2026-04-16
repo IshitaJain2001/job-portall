@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {addJob} from "../redux/reducerfn.js"
+import { useNavigate } from 'react-router-dom'
 export default function Recrruiter() {
   let user= JSON.parse(localStorage.getItem("loggedinUser"))
 
@@ -12,15 +13,15 @@ export default function Recrruiter() {
         applications:[]
     })
 const dispatch= useDispatch()
-const [jobss, setJobss] = useState(JSON.parse(localStorage.getItem("jobs")))
-const jobb= jobss.filter((job)=>job.postedBy== user.name)
+const [jobss, setJobss] = useState(JSON.parse(localStorage.getItem("jobs")) || [])
+const jobb= jobss.filter((job)=>job.postedBy== user?.name)
 console.log("----",jobb);
 
     function submitHandler(e){
      
       
 e.preventDefault()
-dispatch(addJob({...formData, postedBy: user.name}))
+dispatch(addJob({...formData, postedBy: user?.name}))
     }
 
     function changeHandler(e){
@@ -34,10 +35,14 @@ setFormData({
 })
 }
 
-
+const navigate= useNavigate()
   return (
     <div>
-      <form action="">
+      {
+        !user ?
+        <button onClick={()=>navigate("/")}>login / signup to proceed</button>
+        : <div>
+  <form action="">
 <input type="text" name="companyName" id="" placeholder='companyName' onChange={(e)=>changeHandler(e)}/>
 <input type="text" name="employmentType" id="" placeholder='employmentType' onChange={(e)=>changeHandler(e)}/>
 <input type="text" name="role" id="" placeholder='role' onChange={e=>changeHandler(e)}/>
@@ -74,6 +79,9 @@ setFormData({
   </div>
 </div>
 </form>
+          </div>
+      }
+    
     </div>
   )
 }
