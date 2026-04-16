@@ -142,12 +142,14 @@ const jobWithId = { ...action.payload, id: newId };
      console.log(action.payload); //applied job
   const user= JSON.parse(  localStorage.getItem("loggedinUser")) //kisne apply kri h
      console.log(user);
-     
+
+
     user.appliedJobs=[...user.appliedJobs || [] , action.payload]
     
     localStorage.setItem("loggedinUser", JSON.stringify(user))
     const user1= JSON.parse(  localStorage.getItem("loggedinUser")) //kisne apply kri h
      console.log(user1);
+     
     },
 
     saveJob: (state, action) => {

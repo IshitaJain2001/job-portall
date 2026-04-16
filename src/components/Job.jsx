@@ -6,10 +6,18 @@ import { applyJob } from '../redux/reducerfn'
 export default function Job() {
   const {id} =   useParams()
  const [jobss, setJobs]=useState( JSON.parse(localStorage.getItem("jobs"))|| [])
+const user = JSON.parse(localStorage.getItem("loggedinUser"))
 const dispatch= useDispatch()
 
 function applyHandler(job){
-dispatch(applyJob(job))
+  console.log(job.applications);
+  job.applications.push(user.name)
+  console.log(job.applications);
+ let newJobs = [...jobss, job]
+ console.log("---------------",newJobs);
+ 
+dispatch(applyJob(job, user.name))
+
 }
 
  const job= jobss.find((job)=>job.id==Number(id))
