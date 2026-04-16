@@ -20,6 +20,8 @@ export default function Login() {
 
   function logoutHandler() {
     localStorage.removeItem("loggedinUser");
+    console.log(JSON.parse(localStorage.getItem("loggedinUser")));
+    
     setLoggedInuser("guest");
   }
 

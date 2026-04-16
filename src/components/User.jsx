@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function User() {
  const [jobs,setJobs] =useState(JSON.parse(localStorage.getItem("jobs"))||[])
-const [loggedin, setLoggedin] = useState(JSON.parse(localStorage.getItem("loggedinUser")) || {})
+const [loggedin, setLoggedin] = useState(JSON.parse(localStorage.getItem("loggedinUser")) || null)
 const [applied, setApplied] = useState(false)
 
 const navigate= useNavigate()
@@ -13,7 +13,13 @@ const navigate= useNavigate()
  }
   return (
     <div>
-      <button onClick={()=>setApplied(!applied)}> applied jobs</button>
+      {
+       loggedin == null ?
+       <button onClick={()=>{
+        navigate("/signin")
+       }}>login to proceed </button>
+       : <div>
+         <button onClick={()=>setApplied(!applied)}> applied jobs</button>
 {
   applied && loggedin.appliedJobs && loggedin.appliedJobs.map((jobss)=>{
     return (
@@ -38,6 +44,9 @@ const navigate= useNavigate()
         
         : <p> no jobs on this  portal</p>
       }
+        </div>
+      }
+     
     </div>
   )
 }
